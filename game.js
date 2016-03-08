@@ -1,17 +1,30 @@
-var gamePieces = new Array("Rock", "Paper", "Scissors", "Dynamite");
+//declare global variables
+var gamePieces = new Array("ROCK", "PAPER", "SCISSORS", "DYNAMITE");
 var userMove = "";
 var computerMove = "";
 var randomNumber = 0;
-        
+
+/*startGame function will:
+- Prompt user for move, uppercase and clean user's entry, and prints user's move to screen.
+- Call an internal function named getRandomGamePiece, which uses a randomly generated number to determine the computer's move
+- Prints computer's move to the screen and calls the whoWins function to compare the moves to determine the winner
+*/
 function startGame(){
 
     //prompt user for their move
-    userMove = prompt("What do you choose? Rock, Paper, Scissors or Dynamite? Be sure to capitalize your choice (ie: \"Rock\" instead of \"rock\")");
+    userMove = prompt("What do you choose? Rock, Paper, Scissors or Dynamite?");
+    
+    //remove spaces, if any, from user's input
+    userMove = userMove.trim();
+    
+    //make user's entry upper case
+    userMove = userMove.toUpperCase();
 
     //print user's choice to the screen
     document.getElementById("userMoveText").innerHTML = userMove;
 
-    //Generate computer's move
+
+        //Generate computer's move
         function getRandomGamePiece(){
 
             //create random number based on length of gamePieces array
@@ -19,19 +32,18 @@ function startGame(){
 
             //pass in randomly generated number, and based on that number, assign a value to
             //the computerMove variable
-            switch (randomNumber)
-            {
+            switch (randomNumber){
                 case 0:
-                    computerMove = "Rock";
+                    computerMove = "ROCK";
                     break;
                 case 1:
-                    computerMove = "Paper";
+                    computerMove = "PAPER";
                     break;
                 case 2:
-                    computerMove = "Scissors";
+                    computerMove = "SCISSORS";
                     break;
                 case 3:
-                    computerMove = "Dynamite";
+                    computerMove = "DYNAMITE";
                     break;
             }
             
@@ -49,31 +61,31 @@ function startGame(){
             if(userMove == computerMove){ //if both moves match, print tie message
                 document.getElementById("winnerText").innerHTML = "Tie";
                     
-            }else if(userMove == "Rock"){ //if user selected Rock, compare against computerMove value
+            }else if(userMove == "ROCK"){ //if user selected Rock, compare against computerMove value
 
-                if(computerMove == "Paper"){
+                if(computerMove == "PAPER"){
                     document.getElementById("winnerText").innerHTML = "The computer wins.";
-                }else if(computerMove == "Scissors"){
+                }else if(computerMove == "SCISSORS"){
                     document.getElementById("winnerText").innerHTML = "The user wins.";
                 }else{ //if computer is dynamite
                     document.getElementById("winnerText").innerHTML = "The computer wins.";
                 }
 
-            }else if(userMove == "Paper"){ //if user selected Paper, compare against computerMove value
+            }else if(userMove == "PAPER"){ //if user selected Paper, compare against computerMove value
 
-                if(computerMove == "Rock"){
+                if(computerMove == "ROCK"){
                     document.getElementById("winnerText").innerHTML = "The user wins.";
-                }else if(computerMove == "Scissors"){
+                }else if(computerMove == "SCISSORS"){
                     document.getElementById("winnerText").innerHTML = "The computer wins.";
                 }else{ //if computer is dynamite
                     document.getElementById("winnerText").innerHTML = "The computer wins.";
                 }
 
-            } else if(userMove == "Scissors"){ //if user selected Scissors, compare against computerMove value
+            } else if(userMove == "SCISSORS"){ //if user selected Scissors, compare against computerMove value
 
-                if(computerMove == "Rock"){
+                if(computerMove == "ROCK"){
                     document.getElementById("winnerText").innerHTML = "The computer wins.";
-                }else if(computerMove == "Paper"){
+                }else if(computerMove == "PAPER"){
                     document.getElementById("winnerText").innerHTML = "The user wins.";
                 }else{
                     document.getElementById("winnerText").innerHTML = "The user wins.";
@@ -81,9 +93,9 @@ function startGame(){
 
             }else{ //assume dynamite was entered by user, and compare against computerMove value
 
-                if(computerMove == "Rock"){
+                if(computerMove == "ROCK"){
                     document.getElementById("winnerText").innerHTML = "The user wins.";
-                }else if(computerMove == "Paper"){
+                }else if(computerMove == "PAPER"){
                     document.getElementById("winnerText").innerHTML = "The user wins.";
                 }else{ //assume scissors was generated by computer
                     document.getElementById("winnerText").innerHTML = "The computer wins.";
