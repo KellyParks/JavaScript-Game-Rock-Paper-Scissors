@@ -1,0 +1,32 @@
+.container {
+	width: 70%;
+}
+
+#userMove{
+	border: 1px solid black;
+	width: 49%;
+	float: left;
+}
+
+#computerMove{
+	border: 1px solid black;
+	width: 49%;
+	float: right;
+}
+
+#winner {
+	clear: both;
+	width: 100%;
+	border: 1px solid black;
+}
+
+h2{
+	text-align: center;
+}
+
+p{
+	border: 1px solid red;
+	width: 90%;
+	height: 40px;
+	margin: 10% auto;
+}
