@@ -1,32 +1,29 @@
-.container {
-	width: 70%;
+.panel-title {
+	font-size: 2em;
 }
 
-#userMove{
-	border: 1px solid black;
-	width: 49%;
-	float: left;
+.panel-body {
+    padding: 9%;
 }
 
-#computerMove{
-	border: 1px solid black;
-	width: 49%;
-	float: right;
+p {
+	margin: 0;
+	font-size: 1.5em;
 }
 
-#winner {
-	clear: both;
-	width: 100%;
-	border: 1px solid black;
+#userMoveText {
+	color: #3c763d;
 }
 
-h2{
-	text-align: center;
+#computerMoveText {
+	color: #31708f;
 }
 
-p{
-	border: 1px solid red;
-	width: 90%;
-	height: 40px;
-	margin: 10% auto;
+#winnerText {
+	color: #8a6d3b;
+}
+
+.btn {
+	margin-top: 1.4em;
+	font-size: 1.8em;
 }

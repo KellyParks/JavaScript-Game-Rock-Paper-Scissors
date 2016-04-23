@@ -1,33 +1,53 @@
 <html>
-    <!-- Well done, Kelly.  Your game works well and follows all
-the requirements.  Your code is nicely commented, and you added
-a nice GUI.  While this wasn't required, you could have added some validation to ensure the user entered good data in the prompt.
-It turned out that your logic in whoWins() didn't account for 
-bad data entered in and defaults to the user winning if the data
-didn't match what you were looking for.  Other than that, every
-thing was great.
-9/10
--->
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="game.css">
         <script src="game.js"></script>
     </head>
     <body>
-        <h1>Rock, Paper, Scissors (and Dynamite) Game</h1>
-    <div class="container">
-    <div id="userMove">
-        <h2>Your Move</h2>
-        <p id="userMoveText"></p>
-    </div>
-    <div id="computerMove">
-        <h2>Computer's Move</h2>
-        <p id="computerMoveText"></p>
-    </div>
-    <div id="winner">
-        <h2>The Winner</h2>
-        <p id="winnerText"></p>
-    </div>
-    <input type="button" onclick="startGame()" value="Start Game">
-    </div>
+        <div class="page-header text-center">
+            <h1>Rock, Paper, Scissors (and Dynamite) Game</h1>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center">Your Move</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p class="text-center" id="userMoveText"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center">Computer's Move</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p class="text-center" id="computerMoveText"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" id="winner">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h2 class="panel-title text-center">The Winner</h2>
+                        </div>
+                        <div class="panel-body">
+                            <p class="text-center" id="winnerText"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <input type="button" onclick="startGame()" class="btn btn-success" value="Start Game">
+                </div>
+            </div>
+        </div>
     </body>
 </html>
