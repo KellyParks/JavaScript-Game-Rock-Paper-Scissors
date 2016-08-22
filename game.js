@@ -1,24 +1,60 @@
-//declare global variables
-var gamePieces = new Array("ROCK", "PAPER", "SCISSORS", "DYNAMITE");
-var userMove = "";
-var computerMove = "";
-var randomNumber = 0;
+//IIFE to create a different name space
+(function(){
 
-/*startGame function will:
-- Prompt user for move, uppercase and clean user's entry, and prints user's move to screen.
-- Call an internal function named getRandomGamePiece, which uses a randomly generated number to determine the computer's move
-- Prints computer's move to the screen and calls the whoWins function to compare the moves to determine the winner
-*/
+    var userMove = "";
+    var computerMove = "";
+    var randomNumber = 0;
+
+    //store moves and relationships to other moves via nested objects and properties
+    var gameMovesAndWinners = {
+
+        'rock': {
+            winsOver: ['scissors']
+        },
+
+        'paper': {
+            winsOver: ['rock']
+        },
+
+        'scissors': {
+            winsOver: ['paper', 'dynamite']
+        },
+
+        'dynamite': {
+            winsOver: ['rock', 'paper']
+        }
+    };
+
+    //object to store all possible outcomes
+    var messages = {
+        'tie': 'It\'s a tie!',
+        'computerWins': 'The computer won!',
+        'userWins' : 'The user won!'
+    }
+
+    function getUserMove(){
+        userMove = prompt("What do you choose? Rock, Paper, Scissors or Dynamite?");
+        userMove = userMove.trim();
+        userMove = userMove.toLowerCase();
+    }
+
+    //whoWins function compares userMove and computerMove variables to determine winner
+    function whoWins(){
+        if(userMove === computerMove){
+            document.getElementById("winnerText").innerHTML = messages.tie;
+        //if computerMove CAN be found in the array (returns a positive value), the user wins
+        } else if (gameMovesAndWinners[userMove].winsOver.indexOf(computerMove) != -1){
+            document.getElementById("winnerText").innerHTML = messages.userWins;
+        //if computerMove CAN'T be found in the array (returns -1), the computer must be the winner
+        } else {
+            document.getElementById("winnerText").innerHTML = messages.computerWins;
+        }
+    }
+
+
+})
+
 function startGame(){
-
-    //prompt user for their move
-    userMove = prompt("What do you choose? Rock, Paper, Scissors or Dynamite?");
-    
-    //remove spaces, if any, from user's input
-    userMove = userMove.trim();
-    
-    //make user's entry upper case
-    userMove = userMove.toUpperCase();
 
     //print user's choice to the screen
     document.getElementById("userMoveText").innerHTML = userMove;
@@ -55,52 +91,7 @@ function startGame(){
             //call function to calculate computer's move
             getRandomGamePiece();
 
-            //whoWins function compares userMove and computerMove variables to determine winner
-            function whoWins(){
-            
-            if(userMove == computerMove){ //if both moves match, print tie message
-                document.getElementById("winnerText").innerHTML = "TIE";
-                    
-            }else if(userMove == "ROCK"){ //if user selected Rock, compare against computerMove value
 
-                if(computerMove == "PAPER"){
-                    document.getElementById("winnerText").innerHTML = "COMPUTER WINS";
-                }else if(computerMove == "SCISSORS"){
-                    document.getElementById("winnerText").innerHTML = "USER WINS";
-                }else{ //if computer is dynamite
-                    document.getElementById("winnerText").innerHTML = "COMPUTER WINS";
-                }
-
-            }else if(userMove == "PAPER"){ //if user selected Paper, compare against computerMove value
-
-                if(computerMove == "ROCK"){
-                    document.getElementById("winnerText").innerHTML = "USER WINS";
-                }else if(computerMove == "SCISSORS"){
-                    document.getElementById("winnerText").innerHTML = "COMPUTER WINS";
-                }else{ //if computer is dynamite
-                    document.getElementById("winnerText").innerHTML = "COMPUTER WINS";
-                }
-
-            } else if(userMove == "SCISSORS"){ //if user selected Scissors, compare against computerMove value
-
-                if(computerMove == "ROCK"){
-                    document.getElementById("winnerText").innerHTML = "COMPUTER WINS";
-                }else if(computerMove == "PAPER"){
-                    document.getElementById("winnerText").innerHTML = "USER WINS";
-                }else{
-                    document.getElementById("winnerText").innerHTML = "USER WINS";
-                }
-
-            }else{ //assume dynamite was entered by user, and compare against computerMove value
-
-                if(computerMove == "ROCK"){
-                    document.getElementById("winnerText").innerHTML = "USER WINS";
-                }else if(computerMove == "PAPER"){
-                    document.getElementById("winnerText").innerHTML = "USER WINS";
-                }else{ //assume scissors was generated by computer
-                    document.getElementById("winnerText").innerHTML = "COMPUTER WINS";
-                }
-            }
             
         }
             //call who Wins function to calculate winner
