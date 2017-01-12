@@ -1,10 +1,6 @@
 //IIFE to create a different name space
 (function(){
 
-    var userMove = "";
-    var computerMove = "";
-    var randomNumber = 0;
-
     //store moves and relationships to other moves via nested objects and properties
     var gameMovesAndWinners = {
 
@@ -25,6 +21,10 @@
         }
     };
 
+    var gamePieces = Object.keys(gameMovesAndWinners);
+    var userMove = "";
+    var computerMove = "";
+
     //object to store all possible outcomes
     var messages = {
         'tie': 'It\'s a tie!',
@@ -32,68 +32,56 @@
         'userWins' : 'The user won!'
     }
 
+    function showUserMove(){
+        document.getElementById("userMoveText").innerHTML = userMove;
+    }
+
+    function showComputerMove(){
+        document.getElementById("computerMoveText").innerHTML = computerMove;
+    }
+
+    function showResult(winnerText){
+        document.getElementById("winnerText").innerHTML = winnerText;
+    }
+
+    function calculateComputerMove() {
+        var random = 0;
+        //create random number based on length of gamePieces array
+        random = Math.floor((Math.random()*gamePieces.length)+0);
+        //grab the computer move randomly from the gamePieces array
+        computerMove = gamePieces[random];
+    }
+
     function getUserMove(){
-        userMove = prompt("What do you choose? Rock, Paper, Scissors or Dynamite?");
-        userMove = userMove.trim();
-        userMove = userMove.toLowerCase();
+        do {
+            userMove = prompt("What do you choose? Rock, Paper, Scissors or Dynamite?");
+            userMove = userMove.trim();
+            userMove = userMove.toLowerCase();
+        } while (gamePieces.indexOf(userMove) === -1)
     }
 
     //whoWins function compares userMove and computerMove variables to determine winner
     function whoWins(){
         if(userMove === computerMove){
-            document.getElementById("winnerText").innerHTML = messages.tie;
+            showResult(messages.tie);
         //if computerMove CAN be found in the array (returns a positive value), the user wins
         } else if (gameMovesAndWinners[userMove].winsOver.indexOf(computerMove) != -1){
-            document.getElementById("winnerText").innerHTML = messages.userWins;
+            showResult(messages.userWins);
         //if computerMove CAN'T be found in the array (returns -1), the computer must be the winner
         } else {
-            document.getElementById("winnerText").innerHTML = messages.computerWins;
+            showResult(messages.computerWins);
         }
     }
 
+    function startGame(){
+        getUserMove();
+        showUserMove();
+        calculateComputerMove();
+        showComputerMove();
+        whoWins();
+    }
 
-})
+    // console.log(document.getElementById("startGameButton"));
+    document.getElementById("startGameButton").addEventListener("click", startGame);
 
-function startGame(){
-
-    //print user's choice to the screen
-    document.getElementById("userMoveText").innerHTML = userMove;
-
-
-        //Generate computer's move
-        function getRandomGamePiece(){
-
-            //create random number based on length of gamePieces array
-            randomNumber = Math.floor((Math.random()*gamePieces.length)+0);
-
-            //pass in randomly generated number, and based on that number, assign a value to
-            //the computerMove variable
-            switch (randomNumber){
-                case 0:
-                    computerMove = "ROCK";
-                    break;
-                case 1:
-                    computerMove = "PAPER";
-                    break;
-                case 2:
-                    computerMove = "SCISSORS";
-                    break;
-                case 3:
-                    computerMove = "DYNAMITE";
-                    break;
-            }
-            
-            //print computer's move to the screen
-            document.getElementById("computerMoveText").innerHTML = computerMove;
-            
-            }
-
-            //call function to calculate computer's move
-            getRandomGamePiece();
-
-
-            
-        }
-            //call who Wins function to calculate winner
-            whoWins();
-        }
+})()
